@@ -1,0 +1,104 @@
+[2020-09-15 12:42:12] {WARN} root : undefined
+[2020-09-15 12:42:12] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:44:42] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:44:42] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:46:28] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:46:28] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:46:47] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:46:47] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 12:50:35] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:50:49] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:50:49] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:51:10] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:51:10] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:51:57] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:51:58] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:53:15] {WARN} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 12:53:15] {WARN} root : Error: Request failed with status code 500
+    at createError (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\createError.js:16:15)
+    at settle (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\core\settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\сул\Desktop\Git\attendence-almaty-server\node_modules\axios\lib\adapters\http.js:244:11)
+    at IncomingMessage.emit (events.js:333:22)
+    at IncomingMessage.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1201:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[2020-09-15 14:22:54] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:23:15] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:24:38] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:27:48] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:34:36] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:36:55] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:40:17] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:41:28] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 14:42:32] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:09:58] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:17:17] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:19:54] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:22:52] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:23:15] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-15 15:24:41] {ERROR} root : {"Error":"Ученик Пак К. занят в указанное время с Группа E.4.ROU-B7 <i>[9:30-11:00 Пн/Пт (с 04.09)]</i>"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Ученик Шаухарова А. занят в указанное время с Группа R.5.ROU-B9 <i>[9:30-10:15 Ср (с 09.09)]</i>"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Ученик Кабдула Ш. занят в указанное время с Группа R.5.ROU-B9 <i>[9:30-10:15 Ср (с 09.09)]</i>"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Ученик Сергазин Ж. занят в указанное время с Группа R.5.ROU-B9 <i>[9:30-10:15 Ср (с 09.09)]</i>"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Ученик Абжанов А. занят в указанное время с Группа R.5.ROU-B9 <i>[9:30-10:15 Ср (с 09.09)]</i>"}
+[2020-09-16 15:15:33] {ERROR} root : {"Error":"Ученик Заречный Д. занят в указанное время с Группа K.5.ROU-C5 <i>[9:30-10:15 Ср (с 02.09)]</i>"}
+[2020-09-16 15:19:37] {ERROR} root : {"Error":"The student is not in the ed. unit"}
+[2020-09-20 12:00:59] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:07:29] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:08:21] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:09:20] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:10:50] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:13:06] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:16:55] {ERROR} root : {"Error":"Требуется поле StudentClientId."}
+[2020-09-20 12:19:00] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 12:20:19] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 12:21:30] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 12:23:09] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 15:05:25] {ERROR} root : {"Error":"Обязательное поле 'Text'."}
+[2020-09-20 16:10:17] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 16:19:56] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 16:34:16] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
+[2020-09-20 16:37:29] {ERROR} root : {"Error":"Student is already studying with the ed. unit"}
