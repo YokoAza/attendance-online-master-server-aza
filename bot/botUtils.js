@@ -15,7 +15,6 @@ function buildDefaultButton(text, callback_data) {
 }
 
 function buildUrlButtonOne(text, url) {
-	console.log('eto ya');
 	return {
 		reply_markup: JSON.stringify({
 			inline_keyboard: [
@@ -26,7 +25,6 @@ function buildUrlButtonOne(text, url) {
 }
 
 function buildUrlButton(obj) {
-	console.log('suka ya');
 	return {
 		reply_markup: JSON.stringify({
 			inline_keyboard: obj	

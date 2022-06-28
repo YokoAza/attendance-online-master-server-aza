@@ -92,11 +92,11 @@ async function setPasses(data,groupId,students){
 	}
 }
 
-async function setGroupResult(date,groupId,students,register,topic){
+async function setGroupResult(date,groupId,students,register,topic,foskres,block,subject){
 	try{
 		await sleep(1000);
 		var responses = [];
-		await students.reduce(async function(previousPromise,student){
+		await students.reduce(async function (previousPromise,student){
 			var res = await previousPromise;
 			responses.push(res);
 			return new Promise(async function(resolve,reject){
@@ -138,6 +138,67 @@ async function setGroupResult(date,groupId,students,register,topic){
 							resolve(true);
 						else
 							reject(false);
+						
+						var data = new Object();
+						data.studentClientId = student.clientid;
+						data.dateTime = date;
+						data.discipline  = subject;
+						var skills = new Array();
+						var skill = new Object();
+						console.log(foskres + "SCORE BLTA")
+						if (subject == 'Математика'){
+							skill.skillId = 1;
+							skill.score = foskres;
+							skills.push(skill);
+							if(block == '4.1'){
+								data.testTypeId = 70
+							}
+							else if(block == '4.2'){
+								data.testTypeId = 71
+							}
+							else if(block == '5'){
+								data.testTypeId = 74
+							}
+							else if(block == '5.1'){
+								data.testTypeId = 72
+							}
+							else if(block == '5.2'){
+								data.testTypeId = 73
+							}
+							else if(block == '6.1'){
+								data.testTypeId = 75
+							}
+							else if(block == '6.2'){
+								data.testTypeId = 76
+							}
+						} 
+						else if(subject == 'Английский язык'){
+							skill.skillId = 2;
+							scill.score = foskres;
+							skills.push(skill);
+							if(block == '1'){
+								data.testTypeId = 77
+							}
+							else if(block == '2'){
+								data.testTypeId = 78
+							}
+							else if(block == '3'){
+								data.testTypeId = 79
+							}
+							else if(block == '4'){
+								data.testTypeId = 80
+							}
+						}		
+						console.log(data + " asddaadad")										
+						data.skills = skills;						
+						var response1 = await api.post(key.domain,'AddEditPersonalTestResult',data,key.apikey);
+						if(response1.status == 200){
+							resolve(true);
+							console.log("успешно");
+						}
+						else{
+							reject(false);
+						}
 					} else {
 						resolve(true);
 					}
@@ -165,10 +226,95 @@ async function setGroupResult(date,groupId,students,register,topic){
 	}
 }
 
-function setAttendance(date,groupId,students,register,subject){
+// async function setPersonalResult(date,subject,students,foskres,block){
+// 	try{
+// 		await sleep(1000);
+// 		var responses = [];
+// 		console.log(students + "dasadsdsasdadsads")
+// 		await students.reduce(async function(previousPromise,student){
+// 			var res = await previousPromise;
+// 			responses.push(res);
+// 			return new Promise(async function(resolve,reject){
+// 				try{
+// 					await sleep(10);
+// 					if(student.attendence && student.clientid != -1 && !student.status && !student.delete){
+// 						var data = new Object();
+// 						data.studentClientId = student.clientid;
+// 						data.date = date;
+// 						data.discipline  = subject;
+// 						var skills = new Array();
+// 						var skill = new Object();
+// 						if (subject == 'Математика'){
+// 							skill.skillId = 1;
+// 							scill.score = foskres;
+// 							skills.push(skill);
+// 							if(block == '4.1'){
+// 								data.testTypeId = 70
+// 							}
+// 							else if(block == '4.2'){
+// 								data.testTypeId = 71
+// 							}
+// 							else if(block == '5'){
+// 								data.testTypeId = 74
+// 							}
+// 							else if(block == '5.1'){
+// 								data.testTypeId = 72
+// 							}
+// 							else if(block == '5.2'){
+// 								data.testTypeId = 73
+// 							}
+// 							else if(block == '6.1'){
+// 								data.testTypeId = 75
+// 							}
+// 							else if(block == '6.2'){
+// 								data.testTypeId = 76
+// 							}
+// 						} 
+// 						else if(subject == 'Английский язык'){
+// 							skill.skillId = 2;
+// 							scill.score = foskres;
+// 							skills.push(skill);
+// 							if(block == '1'){
+// 								data.testTypeId = 77
+// 							}
+// 							else if(block == '2'){
+// 								data.testTypeId = 78
+// 							}
+// 							else if(block == '3'){
+// 								data.testTypeId = 79
+// 							}
+// 							else if(block == '4'){
+// 								data.testTypeId = 80
+// 							}
+// 						}												
+// 						data.skills = skills;						
+// 						var response = await api.post(key.domain,'AddEditPersonalTestResult',data,key.apikey);
+// 						if(response.status == 200){
+// 							resolve(true);
+// 							console.log("успешно");
+// 						}
+// 						else{
+// 							reject(false);
+// 						}
+// 					} else {
+// 						resolve(true);
+// 					}
+// 				}catch(err){
+// 					console.log(err);
+// 					resolve(false);
+// 				}
+// 			});
+// 		},Promise.resolve(true));
+// 	}catch(error){
+// 		console.log(error);
+// 	}
+// }
+
+function setAttendance(date,groupId,students,register,topic,foskres,block,subject){
 	var pass = setPasses(date,groupId,students);
 	if(pass){
-		setGroupResult(date,groupId,students,register,subject);
+		setGroupResult(date,groupId,students,register,topic,foskres,block,subject);
+		//setPersonalResult(date,subject,students,foskres,block);
 	}
 }
 

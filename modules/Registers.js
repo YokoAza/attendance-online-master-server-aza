@@ -10,6 +10,9 @@ const Registers = sequelize.define('Registers',{
 	Change:{
 		type: Sequelize.BOOLEAN
 	},
+	Union:{
+		type: Sequelize.BOOLEAN
+	},
 	LevelTest:{
 		type: Sequelize.STRING
 	},

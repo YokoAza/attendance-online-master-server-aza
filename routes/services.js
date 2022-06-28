@@ -574,6 +574,7 @@ router.post('/setattendence', async (req, res) => {
 		var TeacherId = req.body.group.teacherId;
 		var SubTeacherId = req.body.group.subteacherId;
 		var Change = req.body.group.change;
+		var Union = req.body.group.union;
 		var GroupId = req.body.group.Id;
 		var GroupName = req.body.group.name;
 		var Time = req.body.group.time;
@@ -611,39 +612,40 @@ router.post('/setattendence', async (req, res) => {
 				HomeWorkComment += 'Домашнее задание : ' + homeworkText;
 			}
 		}*/
-		splittedTimeZamena = Time.split('-');
-		console.log(splittedTimeZamena);
-		timeStartZamena = new Date("01/01/1970" + " " + splittedTimeZamena[0]);		
-		timeEndZamena = new Date("01/01/1970" + " " + splittedTimeZamena[1]);		
-		
-		
+		if(group.union != true){
+			splittedTimeZamena = Time.split('-');
+			timeStartZamena = new Date("01/01/1970" + " " + splittedTimeZamena[0]);		
+			timeEndZamena = new Date("01/01/1970" + " " + splittedTimeZamena[1]);		
+			
+			
 
-		var CheckRegistersAll = await Registers.findAll({
-			attributes: ['TeacherId','Time','LessonDate'],
-			where: {
-				TeacherId: TeacherId,
-				LessonDate: new Date(LessonDate)
+			var CheckRegistersAll = await Registers.findAll({
+				attributes: ['TeacherId','Time','LessonDate'],
+				where: {
+					TeacherId: TeacherId,
+					LessonDate: new Date(LessonDate)
+				}
+			});
+			var count= Object.keys(CheckRegistersAll).length;
+			for (let i = 0; i < count; i++) {
+				TimeOfInst = CheckRegistersAll[i]["Time"];
+				splittedTime = TimeOfInst.split('-');
+				timeStart = new Date("01/01/1970" + " " + splittedTime[0]);		
+				timeEnd = new Date("01/01/1970" + " " + splittedTime[1]);
+				if ((timeStart < timeStartZamena && timeStart < timeEndZamena) && (timeEnd < timeStartZamena && timeEnd < timeEndZamena)){
+					continue
+				} else if(((timeStart > timeStartZamena && timeStart > timeEndZamena) && (timeEnd > timeStartZamena && timeEnd > timeEndZamena))){
+					continue
+				}
+				else{
+					var result = "da"
+					res.json({
+						status: 100,
+						message: 'Error'
+					});
+					break;
+				}		
 			}
-		});
-		var count= Object.keys(CheckRegistersAll).length;
-		for (let i = 0; i < count; i++) {
-			TimeOfInst = CheckRegistersAll[i]["Time"];
-			splittedTime = TimeOfInst.split('-');
-			timeStart = new Date("01/01/1970" + " " + splittedTime[0]);		
-			timeEnd = new Date("01/01/1970" + " " + splittedTime[1]);
-			if ((timeStart < timeStartZamena && timeStart < timeEndZamena) && (timeEnd < timeStartZamena && timeEnd < timeEndZamena)){
-				continue
-			} else if(((timeStart > timeStartZamena && timeStart > timeEndZamena) && (timeEnd > timeStartZamena && timeEnd > timeEndZamena))){
-				continue
-			}
-			else{
-				var result = "da"
-				res.json({
-					status: 100,
-					message: 'Error'
-				});
-				break;
-			}		
 		}
 		if(result == null){
 			/*if(SubTeacherId == CheckRegister.Id && Time == CheckRegister.LessonTime && LessonDate == CheckRegister.LessonDateCheck){
@@ -651,6 +653,7 @@ router.post('/setattendence', async (req, res) => {
 			}*/
 			var newRegister = await Registers.create({
 					Change,
+					Union,
 					LevelTest,
 					RoomId,
 					SubTeacherId,
@@ -669,7 +672,7 @@ router.post('/setattendence', async (req, res) => {
 					Aibucks,
 					TopicId
 				},{
-					fields:['Change','LevelTest','RoomId','SubTeacherId','TeacherId','GroupId','GroupName','Time','LessonDate','WeekDays','SubmitDay','SubmitTime','IsSubmitted','IsStudentAdd','IsOperator','SchoolId','Aibucks','TopicId']
+					fields:['Change','Union','LevelTest','RoomId','SubTeacherId','TeacherId','GroupId','GroupName','Time','LessonDate','WeekDays','SubmitDay','SubmitTime','IsSubmitted','IsStudentAdd','IsOperator','SchoolId','Aibucks','TopicId']
 			});
 			if(newRegister){ 
 				var subregisters = [];
@@ -750,7 +753,23 @@ router.post('/setattendence', async (req, res) => {
 					});
 					new Promise(async (resolve) =>{
 						try{
-							
+							if(group.union){
+								console.log("UNION KAKOGA YJYAA");
+								var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
+								var text = '';
+								text+='Была замена : \n Заменяющий преподаватель: Test Prepod2'  + '\nЗаменяемый преподаватель: ' + group.teacher + '\n Дата замены: '+ group.date +'\nгруппа: Id: '+ group.Id + '\nГруппа: '+ group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n\n';
+								queueBot.request((retry) => bot.telegram.sendMessage(process.env.OPERATOR_GROUP_CHATID,text,botUtils.buildUrlButtonOne('Ссылка на группу',url))
+								.catch(error => {
+									if (error.response.status === 429) { // We've got 429 - too many requests
+											return retry(error.response.data.parameters.retry_after) // usually 300 seconds
+									}
+									throw error; // throw error further
+								}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
+							}
+							if(group.change === true && group.union != true){
+								console.log("CHANGE KAKOGA YJYAA");
+							}
+
 							var deleteStudents = [];
 							var addStudents = [];
 							students.map(async function(student){
@@ -908,11 +927,14 @@ router.post('/setattendencet', async (req, res) => {
 		var Aibucks = req.body.Aibucks?req.body.Aibucks:null;
 		var TopicId = req.body.topic ? req.body.topic.Id: null;
 		var TopicPriority = req.body.topic ? req.body.topic.Priority : 0;
+		var block = req.body.block;
 		var homework = req.body.homework ? req.body.homework : null;
 		var kolhar = req.body.kolhar;
 		var foskres = req.body.foskres;
 		var subject = req.body.group.subject;
 		var HomeWorkComment = '';
+		console.log(subject + "SUBJECT ") ;
+		console.log(block + "BLOCK ") ;
 
 		var newRegister = await Registers.create({
 				Change,
@@ -940,6 +962,7 @@ router.post('/setattendencet', async (req, res) => {
 			var subregisters = [];
 			var voksrestests = [];
 			var kolhartest = [];
+			var scoreVoskres = "";
 			students.map(function(student){
 				if(!student.delete){
 					var obj = {};
@@ -978,7 +1001,7 @@ router.post('/setattendencet', async (req, res) => {
 						voksresobj.Subject = subject;
 						voksresobj.LessonDay = LessonDate;
 						voksresobj.SubmitDay = SubmitDay;
-
+						scoreVoskres = student.foskres;
 						voksrestests.push(voksresobj);
 					}
 
@@ -996,14 +1019,13 @@ router.post('/setattendencet', async (req, res) => {
 					fields: ['ClientId','Subject','LessonDay','SubmitDay','Score']
 				});
 			}
-
 			var result = await SubRegisters.bulkCreate(subregisters,{
 				fields:['RegisterId','ClientId','FullName','Pass','Homework','Test','Lesson','Comment','Status','isWatched','Aibucks','SubjectN']
 			});
 			if(result.length > 0){
 				new Promise(async (resolve) => {
 					try{
-						await hht(LessonDate,GroupId,students,newRegister,TopicPriority);
+						await hht(LessonDate,GroupId,students,newRegister,TopicPriority,scoreVoskres,block,subject);
 						resolve(true);
 					}catch(err){
 						console.log(err);
@@ -1039,39 +1061,39 @@ router.post('/setattendencet', async (req, res) => {
 							}
 						});
 						await sleep(1000);
-						if(deleteStudents.length > 0){
-							var text = '';
-							var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
-							text = 'Дата урока: ' + group.date+'\n\n';
-							text += 'Убрать учеников с группы\n\n Группа: \nId: '+ group.Id + '\nИмя: '+group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n';
-							var sts = deleteStudents.join('\n');
-							text += 'Список Учеников:\n' + sts;
-							queueBot.request((retry) => bot.telegram.sendMessage(process.env.OPERATOR_GROUP_CHATID,text,botUtils.buildUrlButtonOne('Ссылка на группу',url))
-							.catch(error => {
-								console.log(error);
-								if (error.response.status === 429) { // We've got 429 - too many requests
-										return retry(error.response.data.parameters.retry_after) // usually 300 seconds
-								}
-								throw error; // throw error further
-							}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
-						}
+						// if(deleteStudents.length > 0){
+						// 	var text = '';
+						// 	var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
+						// 	text = 'Дата урока: ' + group.date+'\n\n';
+						// 	text += 'Убрать учеников с группы\n\n Группа: \nId: '+ group.Id + '\nИмя: '+group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n';
+						// 	var sts = deleteStudents.join('\n');
+						// 	text += 'Список Учеников:\n' + sts;
+						// 	queueBot.request((retry) => bot.telegram.sendMessage(process.env.OPERATOR_GROUP_CHATID,text,botUtils.buildUrlButtonOne('Ссылка на группу',url))
+						// 	.catch(error => {
+						// 		console.log(error);
+						// 		if (error.response.status === 429) { // We've got 429 - too many requests
+						// 				return retry(error.response.data.parameters.retry_after) // usually 300 seconds
+						// 		}
+						// 		throw error; // throw error further
+						// 	}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
+						// }
 						await sleep(1000);
-						if(addStudents.length > 0){
-							var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
-							var text = '';
-							text = 'Дата урока: ' + group.date+'\n\n';
-							text += 'Найти и добавить учеников в группу\n\n Группа:\nId: '+ group.Id + '\nИмя: '+ group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n';
-							var sts = addStudents.join('\n');
-							text += 'Список Учеников:\n' + sts;
-							queueBot.request((retry) => bot.telegram.sendMessage(process.env.OPERATOR_GROUP_CHATID,text,botUtils.buildUrlButtonOne('Ссылка на группу',url))
-							.catch(error => {
-								console.log(error);
-								if (error.response.status === 429) { // We've got 429 - too many requests
-									return retry(error.response.data.parameters.retry_after) // usually 300 seconds
-								}
-								throw error; // throw error further
-							}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
-						}
+						// if(addStudents.length > 0){
+						// 	var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
+						// 	var text = '';
+						// 	text = 'Дата урока: ' + group.date+'\n\n';
+						// 	text += 'Найти и добавить учеников в группу\n\n Группа:\nId: '+ group.Id + '\nИмя: '+ group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n';
+						// 	var sts = addStudents.join('\n');
+						// 	text += 'Список Учеников:\n' + sts;
+						// 	queueBot.request((retry) => bot.telegram.sendMessage(process.env.OPERATOR_GROUP_CHATID,text,botUtils.buildUrlButtonOne('Ссылка на группу',url))
+						// 	.catch(error => {
+						// 		console.log(error);
+						// 		if (error.response.status === 429) { // We've got 429 - too many requests
+						// 			return retry(error.response.data.parameters.retry_after) // usually 300 seconds
+						// 		}
+						// 		throw error; // throw error further
+						// 	}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
+						// }
 					}catch(err){
 						console.log(err);
 						resolve(true);
@@ -2483,7 +2505,7 @@ router.post('/telegramtohh', async(req,res) => {
 										data.skills = skills;
 									}
 									data.commentHtml = student.Comment;
-									var res = await api.post(key.domain,'AddEditEdUnitTestResult',data,key.apikey);
+									var res = await api.post(key.domain,'',data,key.apikey);
 				
 									if(res.status == 200){
 										await student.update({
