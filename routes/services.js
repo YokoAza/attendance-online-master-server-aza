@@ -754,7 +754,6 @@ router.post('/setattendence', async (req, res) => {
 					new Promise(async (resolve) =>{
 						try{
 							if(group.union){
-								console.log("UNION KAKOGA YJYAA");
 								var url = `https://${process.env.DOMAIN}.t8s.ru/Learner/Group/${group.Id}`;
 								var text = '';
 								text+='Была замена : \n Заменяющий преподаватель: Test Prepod2'  + '\nЗаменяемый преподаватель: ' + group.teacher + '\n Дата замены: '+ group.date +'\nгруппа: Id: '+ group.Id + '\nГруппа: '+ group.name+'\nПреподаватель: '+group.teacher+'\nВремя: ' + group.time + '\nДни: '+ group.days+ '\n\n\n';
@@ -767,7 +766,6 @@ router.post('/setattendence', async (req, res) => {
 								}),process.env.OPERATOR_GROUP_CHATID,'telegramGroup');
 							}
 							if(group.change === true && group.union != true){
-								console.log("CHANGE KAKOGA YJYAA");
 							}
 
 							var deleteStudents = [];
@@ -794,7 +792,6 @@ router.post('/setattendence', async (req, res) => {
 											var yyyy = today.getFullYear();
 											today = mm + '.' + dd + '.' + yyyy;
 											data.end = today;
-											console.log(data.end + ' ' + data.edUnitId + ' ' + data.studentClientId + ' DATATATATATATATATATATATA');
 											await api.post(`${process.env.DOMAIN}`,'EditEdUnitStudent',data,key.apikey);
 									}
 								})
@@ -2430,7 +2427,8 @@ router.post('/telegramtohh', async(req,res) => {
 					});
 					if(subregisters.length > 0){
 						await subregisters.reduce(async function(previousStudentPromise,student){
-							await previousStudentPromise;							
+							await previousStudentPromise;	
+							var params = new Array()						
 							return new Promise(async function(resolve,reject){
 								try{
 									var data = new Object();
@@ -2504,10 +2502,19 @@ router.post('/telegramtohh', async(req,res) => {
 										skills.push(skill);
 										data.skills = skills;
 									}
+									var st = new Object()
+									st.Date = register.LessonDate;
+									st.EdUnitId = register.GroupId;
+									st.StudentClientId = student.ClientId;
+									st.Pass = true;
+									st.Payable = true;
+									st.overwriteAcceptedManually = true;
+									params.push(st);
 									data.commentHtml = student.Comment;
 									var res = await api.post(key.domain,'',data,key.apikey);
-				
-									if(res.status == 200){
+									var response = await api.post(key.domain,'SetStudentPasses',params,key.apikey);
+									
+									if(res.status == 200 & response.status == 200){
 										await student.update({
 											Status: false
 										});
