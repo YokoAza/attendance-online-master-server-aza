@@ -44,6 +44,8 @@ const key = {
     "apikey": process.env.APIKEY
 };
 
+const tid = process.env.TEACHER_ID
+
 const queueBot = new QueueBot({
 	rules:{
 		telegramIndividual: {
@@ -632,9 +634,9 @@ router.post('/setattendence', async (req, res) => {
 				splittedTime = TimeOfInst.split('-');
 				timeStart = new Date("01/01/1970" + " " + splittedTime[0]);		
 				timeEnd = new Date("01/01/1970" + " " + splittedTime[1]);
-				if ((timeStart < timeStartZamena && timeStart < timeEndZamena) && (timeEnd < timeStartZamena && timeEnd < timeEndZamena)){
+				if ((timeStart < timeStartZamena && timeStart < timeEndZamena) && (timeEnd <= timeStartZamena && timeEnd < timeEndZamena)){
 					continue
-				} else if(((timeStart > timeStartZamena && timeStart > timeEndZamena) && (timeEnd > timeStartZamena && timeEnd > timeEndZamena))){
+				} else if(((timeStart > timeStartZamena && timeStart >= timeEndZamena) && (timeEnd > timeStartZamena && timeEnd > timeEndZamena))){
 					continue
 				}
 				else{
@@ -646,6 +648,9 @@ router.post('/setattendence', async (req, res) => {
 					break;
 				}		
 			}
+		}
+		else if(group.union == true){
+			TeacherId = tid;
 		}
 		if(result == null){
 			/*if(SubTeacherId == CheckRegister.Id && Time == CheckRegister.LessonTime && LessonDate == CheckRegister.LessonDateCheck){
